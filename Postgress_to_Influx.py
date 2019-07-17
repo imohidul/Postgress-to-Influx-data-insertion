@@ -6,7 +6,7 @@ import pg
 import logging
 
 
-influx_database_info ={'database': 'testsmsa',
+influx_database_info ={'database': 'x',
                        'host': 'localhost',
                        'port': 8086,
                        'database_exist': False,
@@ -17,31 +17,7 @@ pg_database_info = {'host': 'x',
                     'database_name': 'x',
                     'user': 'x',
                     'password': 'x'}
-sql = "select a.branch, sum(a.account) as account, sum(a.mobileno) as mobileno "\
-      "from (select crbranchcode as branch, count(distinct creditaccount)"\
-      "as account, count(distinct mobileno) as mobileno from TtDestinationlog "\
-      "where 1 = 1 and debitaccount like 'BDT%' "\
-      "and creditaccount not like 'BDT%' "\
-      "and destinationstatus = 'Sent' and createdon <= '{}' "\
-      "group by crbranchcode union all "\
-      "select  drbranchcode as branch, count(distinct debitaccount) "\
-      "as account, count(distinct mobileno) as mobileno "\
-      "from TtDestinationlog where 1 = 1 "\
-      "and debitaccount not like 'BDT%' and creditaccount like 'BDT%' "\
-      "and destinationstatus = 'Sent' and createdon <= '{}' "\
-      "group by drbranchcode union all "\
-      "select crbranchcode as branch, count(distinct creditaccount) "\
-      "as account, count(distinct mobileno) as mobileno from TtDestinationlog "\
-      "where 1 = 1 and debitaccount not like 'BDT%' and creditaccount not like "\
-      "'BDT%' and destinationstatus = 'Sent' and createdon <= '{}' "\
-      "group by crbranchcode union all "\
-      "select (case when messagetype = '910' then creditbranchcode "\
-      "else debitbranchcode end) as branch, count(distinct accountNumber) "\
-      "as account, count(distinct mobileno) as mobileno from dedestinationlog "\
-      "where 1 = 1 and accountNumber not like 'BDT%' and destinationstatus = 'Sent' "\
-      "and createdon <= '{}' group by (case when "\
-      "messagetype = '910' then creditbranchcode else debitbranchcode end)) a "\
-      "where 1 = 1 group by a.branch;"
+sql = "your sql"
 
 
 def logging_config():
